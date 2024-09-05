@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .title }}</title>
+</head>
+<body>
+    <h1>Notifikasi</h1>
+    <div class="result">
+
+    </div>
+
+    <script>
+        if (typeof document !== "undefined") {
+            const source = new EventSource("/notification");
+            source.onmessage = function(event) {
+                document.getElementById("result").innerHTML += `<p style="margin: 0">` + event.data + `</p>`;
+            };
+        } else {
+            document.getElementById("result").innerHTML = "Maaf browser does not support SSE."
+        }
+    </script>
+</body>
+</html>
